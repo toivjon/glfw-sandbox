@@ -1,3 +1,4 @@
+#include <cassert>
 #include <cstdio>
 #include <cstdlib>
 
@@ -10,6 +11,12 @@
 static void init();
 static void shutdown();
 static void handleError(int code, const char* description);
+
+// ============================================================================
+// GLOBAL VARIABLES
+// ============================================================================
+
+static GLFWwindow* sWindow = nullptr;
 
 // ============================================================================
 // Initialize all necessary components to start the application.
@@ -26,6 +33,16 @@ static void init()
     exit(EXIT_FAILURE);
   }
 
+  // specify that we want to use modern OpenGL.
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+  // create the main window for the application.
+  sWindow = glfwCreateWindow(800, 600, "GLFW", NULL, NULL);
+  assert(sWindow != NULL);
+
   printf("Using GLFW (%s)\n", glfwGetVersionString());
 }
 
@@ -37,6 +54,7 @@ static void init()
 static void shutdown()
 {
   printf("Closing application\n");
+  glfwDestroyWindow(sWindow);
   glfwTerminate();
 }
 
