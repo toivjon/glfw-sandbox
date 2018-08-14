@@ -5,7 +5,7 @@ CXX = g++
 CXXFLAGS = -std=c++11 -Wall -Wextra
 
 # linker flags.
-LDFLAGS =
+LDFLAGS = -lglfw3 -lgdi32 -lopengl32
 
 # the path to source files.
 SRC_PATH = src
