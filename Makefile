@@ -2,7 +2,7 @@
 CXX = g++
 
 # compiler compilation flags.
-CXXFLAGS = -std=c++11 -Wall -Wextra
+CXXFLAGS = -std=c++11 -Wall -Wextra -Isrc
 
 # linker flags.
 LDFLAGS = -lglfw3 -lgdi32 -lopengl32

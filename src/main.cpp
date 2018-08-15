@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <vector>
 
+#include <glad.h>
 #include <GLFW/glfw3.h>
 
 #define WINDOW_WIDTH  800
@@ -68,6 +69,9 @@ static void init()
 
   // activate the GL context from the window.
   glfwMakeContextCurrent(sWindow);
+
+  // initialize GLAD to get access to modern OpenGL functions.
+  gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
 
   printf("Using GLFW (%s)\n", glfwGetVersionString());
 }
