@@ -78,6 +78,8 @@ int main()
   init();
   while (!glfwWindowShouldClose(sWindow))
   {
+    glClear(GL_COLOR_BUFFER_BIT);
+
     // TODO ... render stuff here.
 
     glfwSwapBuffers(sWindow);
