@@ -76,6 +76,11 @@ static void init()
   // initialize GLAD to get access to modern OpenGL functions.
   gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
 
+  // resize OpenGL viewport to match with the size of the window's framebuffer.
+  int viewportWidth, viewportHeight;
+  glfwGetFramebufferSize(sWindow, &viewportWidth, &viewportHeight);
+  glViewport(0, 0, viewportWidth, viewportHeight);
+
   // define a callback to listen keyboard events.
   glfwSetKeyCallback(sWindow, &handleKey);
 
