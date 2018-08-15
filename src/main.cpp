@@ -16,6 +16,7 @@
 static void init();
 static void shutdown();
 static void handleError(int code, const char* description);
+static void handleKey(GLFWwindow* window, int key, int code, int action, int mods);
 
 // ============================================================================
 // GLOBAL VARIABLES
@@ -73,6 +74,9 @@ static void init()
   // initialize GLAD to get access to modern OpenGL functions.
   gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
 
+  // define a callback to listen keyboard events.
+  glfwSetKeyCallback(sWindow, &handleKey);
+
   printf("Using GLFW (%s)\n", glfwGetVersionString());
 }
 
@@ -98,6 +102,21 @@ static void handleError(int code, const char* description)
 {
   printf("GLFW error [%d]: %s\n", code, description);
   exit(EXIT_FAILURE);
+}
+
+// ============================================================================
+// A key callback to listen and handle keyboard events.
+//
+// @param window The window that received the event.
+// @param key The keyboard key that was pressed or released.
+// @param code The system-specific scancode of the key.
+// @param action GLFW_PRESS, GLFW_RELEASE or GLFW_REPEAT.
+// @param mods Bit field describing which modifier keys were held down.
+// ============================================================================
+static void handleKey(GLFWwindow* window, int key, int code, int action, int mods)
+{
+  assert(window != nullptr);
+  printf("key [key=%d, code=%d, action=%d, mods=%d]\n", key, code, action, mods);
 }
 
 // ============================================================================
