@@ -76,5 +76,12 @@ int main()
 {
   atexit(shutdown);
   init();
+  while (!glfwWindowShouldClose(sWindow))
+  {
+    // TODO ... render stuff here.
+
+    glfwSwapBuffers(sWindow);
+    glfwPollEvents();
+  }
   return 0;
 }
