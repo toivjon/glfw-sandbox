@@ -43,6 +43,9 @@ static void init()
   sWindow = glfwCreateWindow(800, 600, "GLFW", NULL, NULL);
   assert(sWindow != NULL);
 
+  // activate the GL context from the window.
+  glfwMakeContextCurrent(sWindow);
+
   printf("Using GLFW (%s)\n", glfwGetVersionString());
 }
 
