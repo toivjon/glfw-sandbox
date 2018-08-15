@@ -1,6 +1,7 @@
 #include <cassert>
 #include <cstdio>
 #include <cstdlib>
+#include <vector>
 
 #include <GLFW/glfw3.h>
 
@@ -31,6 +32,19 @@ static void init()
   // initialize the GLFW framework.
   if (glfwInit() == GLFW_FALSE) {
     exit(EXIT_FAILURE);
+  }
+
+  // enumerate connected monitors and check which is the primary monitor.
+  int monitorCount = 0;
+  GLFWmonitor** monitors = glfwGetMonitors(&monitorCount);
+  GLFWmonitor* primaryMonitor = glfwGetPrimaryMonitor();
+  printf("Detected %d connected monitors:\n", monitorCount);
+  for (auto i = 0; i < monitorCount; i++) {
+    const auto monitor = monitors[i];
+    auto name = glfwGetMonitorName(monitor);
+    auto mode = glfwGetVideoMode(monitor);
+    auto isPrimary = (monitor == primaryMonitor);
+    printf("\t[%s] %s (%dx%d)\n", (isPrimary ? "x" : " "), name, mode->width, mode->height);
   }
 
   // specify that we want to use modern OpenGL.
