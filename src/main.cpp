@@ -18,6 +18,7 @@ static void shutdown();
 static void handleError(int code, const char* description);
 static void handleKey(GLFWwindow* window, int key, int code, int action, int mods);
 static void handleMouseButton(GLFWwindow* window, int button, int action, int mods);
+static void handleFramebufferResize(GLFWwindow* window, int width, int height);
 
 // ============================================================================
 // GLOBAL VARIABLES
@@ -81,6 +82,9 @@ static void init()
   // define a callback to listen mouse button events.
   glfwSetMouseButtonCallback(sWindow, handleMouseButton);
 
+  // define a callback to listen for window framebuffer size changes.
+  glfwSetFramebufferSizeCallback(sWindow, handleFramebufferResize);
+
   printf("Using GLFW (%s)\n", glfwGetVersionString());
 }
 
@@ -135,6 +139,22 @@ static void handleMouseButton(GLFWwindow* window, int button, int action, int mo
 {
   assert(window != nullptr);
   printf("mouse [button=%d, action=%d, mods=%d]\n", button, action, mods);
+}
+
+// ============================================================================
+// A framebuffer resize callback to listen for framebuffer size changes. Useful
+// to apply new size for the OpenGL viewport size whenever window framebuffer
+// is being resized (e.g. on window resize or dragged between monitors).
+//
+// @param window The window that received the event.
+// @param width The new width of the framebuffer.
+// @param height The new height of the framebuffer.
+// ============================================================================
+static void handleFramebufferResize(GLFWwindow* window, int width, int height)
+{
+  assert(window != nullptr);
+  printf("framebuffer [width=%d height=%d]\n", width, height);
+  glViewport(0, 0, width, height);
 }
 
 // ============================================================================
