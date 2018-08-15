@@ -17,6 +17,7 @@ static void init();
 static void shutdown();
 static void handleError(int code, const char* description);
 static void handleKey(GLFWwindow* window, int key, int code, int action, int mods);
+static void handleMouseButton(GLFWwindow* window, int button, int action, int mods);
 
 // ============================================================================
 // GLOBAL VARIABLES
@@ -77,6 +78,9 @@ static void init()
   // define a callback to listen keyboard events.
   glfwSetKeyCallback(sWindow, &handleKey);
 
+  // define a callback to listen mouse button events.
+  glfwSetMouseButtonCallback(sWindow, handleMouseButton);
+
   printf("Using GLFW (%s)\n", glfwGetVersionString());
 }
 
@@ -117,6 +121,20 @@ static void handleKey(GLFWwindow* window, int key, int code, int action, int mod
 {
   assert(window != nullptr);
   printf("key [key=%d, code=%d, action=%d, mods=%d]\n", key, code, action, mods);
+}
+
+// ============================================================================
+// A mouse button callback to listen mouse button events.
+//
+// @param window The window that received the event.
+// @param button The mouse button that was pressed or released.
+// @param action One of GLFW_PRESS or GLFW_RELEASE.
+// @param mods Bit field describing which modifier keys were hold down.
+// ============================================================================
+static void handleMouseButton(GLFWwindow* window, int button, int action, int mods)
+{
+  assert(window != nullptr);
+  printf("mouse [button=%d, action=%d, mods=%d]\n", button, action, mods);
 }
 
 // ============================================================================
