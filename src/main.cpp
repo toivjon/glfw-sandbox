@@ -5,6 +5,9 @@
 
 #include <GLFW/glfw3.h>
 
+#define WINDOW_WIDTH  800
+#define WINDOW_HEIGHT 600
+
 // ============================================================================
 // FUNCTION PROTOTYPES
 // ============================================================================
@@ -53,9 +56,15 @@ static void init()
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-  // create the main window for the application.
-  sWindow = glfwCreateWindow(800, 600, "GLFW", NULL, NULL);
+  // create the main window for the application in the primary monitor.
+  sWindow = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "GLFW", NULL, NULL);
   assert(sWindow != NULL);
+
+  // move the main window into the center of the monitor.
+  auto mode = glfwGetVideoMode(primaryMonitor);
+  auto x = (mode->width / 2) - (WINDOW_WIDTH / 2);
+  auto y = (mode->height / 2) - (WINDOW_HEIGHT / 2);
+  glfwSetWindowPos(sWindow, x, y);
 
   // activate the GL context from the window.
   glfwMakeContextCurrent(sWindow);
