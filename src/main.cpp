@@ -172,7 +172,7 @@ int main()
   {
     glClear(GL_COLOR_BUFFER_BIT);
 
-    // TODO ... render stuff here.
+    // ... render stuff here.
 
     glfwSwapBuffers(sWindow);
     glfwPollEvents();
